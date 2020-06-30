@@ -1,0 +1,103 @@
+{>"layout" /}
+
+{<body}
+	<h1>LAURA</h1><br>
+	<button type="button" class"btn btn-primary btn-block" data-toggle="modal"
+	data-target="#formModal">
+		Criar alerta
+	</button>
+
+	{#recipes}
+		<div class="well"><br>
+			<h4>{name} 
+			<button class="btn btn btn-outline-primary"
+			data-toggle="collapse" href="#recipe_{id}"
+			aria-expanded="false"
+			aria-controls="recipe_{id}">Resumo do alerta</button></h4>
+			<div class="collapse" id="recipe_{id}">
+				<br><p><strong>Fraqueza nas pernas: </strong>{ingredients}</p>
+				<p><strong>Tosse: </strong>{directions}</p>
+				<p><strong>Dor de cabe&#231a: </strong>{pain}</p>
+				<script type="text/javascript">
+					var dir = '{directions}';
+					var ing = '{ingredients}';
+					var pai = '{pain}';
+					function compare() {
+						if ((dir.includes(5)) || (dir.includes(4)) || (pai.includes(5)) || (pai.includes(4)) 
+							|| (ing.includes(5)) || (ing.includes(4))){
+							alerta = '<strong>Alerta: </strong><strong style="color:red">vermelho</strong>';
+						} else if ((dir.includes(3)) || (dir.includes(2)) || (pai.includes(3)) || (pai.includes(2)) 
+							|| (ing.includes(3)) || (ing.includes(2))){
+							alerta = '<strong>Alerta: </strong><strong style="color:yellow">amarelo</strong>';
+						} else if ((dir.includes(1)) || (pai.includes(1)) || (ing.includes(1))){
+							alerta = '<strong>Alerta: </strong><strong style="color:blue">azul</strong>';
+						} else{ alerta = '<strong>Alerta: </strong><strong style="color:gray">cinza</strong>'; }
+					}
+					compare();
+				</script>
+				<p><script type="text/javascript">document.write(alerta)</script></p><br>
+				<button class="btn btn-danger delete-recipe" data-id="{id}">Deletar</button>
+			</div>
+		</div>
+	{/recipes}
+
+	<!-- Add Form Modal -->
+	<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		<form method="post" action="/add">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+				<h5 class="modal-title w-100 text-center" id="myModalLabel">Criando Alerta</h5>
+			  </div>
+			  <div class="modal-body">
+				<div class="form-group">
+					<label>Nome do Paciente</label>
+					<input type="text" class="form-control"
+					name="name" />
+				</div>
+				<div class="form-group">
+					<label>Fraqueza nas pernas</label>
+					<select class="form-control"name="ingredients" id="ingredients">
+						<option>5 (intensa)</option>
+						<option>4 (moderada)</option>
+						<option>3 (m&eacutedia)</option>
+						<option>2 (leve)</option>
+						<option>1 (fraca)</option>
+						<option>0 (nenhum sintoma)</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Tosse</label>
+					<select class="form-control"name="directions" id="directions">
+						<option>5 (intensa)</option>
+						<option>4 (moderada)</option>
+						<option>3 (m&eacutedia)</option>
+						<option>2 (leve)</option>
+						<option>1 (fraca)</option>
+						<option>0 (nenhum sintoma)</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Dor de cabe&#231a</label>
+					<select class="form-control"name="pain" id="pain">
+						<option>5 (intensa)</option>
+						<option>4 (moderada)</option>
+						<option>3 (m&eacutedia)</option>
+						<option>2 (leve)</option>
+						<option>1 (fraca)</option>
+						<option>0 (nenhum sintoma)</option>
+					</select>
+				</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				<button type="submit" class="btn btn-default" value="Save">Salvar</button>
+			  </div>
+		  </form>
+		</div>
+	  </div>
+	</div>
+{/body}
